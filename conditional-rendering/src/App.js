@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 function LoginButton(props){
   return (
@@ -16,61 +16,47 @@ function LogoutButton(props) {
   );
 }
 
-class LoginControl extends Component {
+function LoginControl()
+{
+  const [isLogIn, setLoginStatus] = useState(false);
 
-  constructor() {
-    super();
-
-    this.state = {
-      isLoggedIn: false
-    }
+  function handleLogInClick() {
+    setLoginStatus(true);
   }
 
-  handleLoggedInclick = () => {
-    this.setState({
-      isLoggedIn: false
-    })
+  function handleLogOutClick() {
+    setLoginStatus(false);
   }
 
-  handleLoggedOutclick = () => {
-    this.setState({
-      isLoggedIn: true
-    })
+  let button;
+
+  if(isLogIn)
+  {
+    button = <LogoutButton onClick={handleLogOutClick} />
+  }
+  else
+  {
+    button = <LoginButton onClick={handleLogInClick} />
   }
 
-  
-  render() {
-    let isLoggedIn = this.state.isLoggedIn;
-    let button;
-  
-    if(isLoggedIn)
-    {
-      button = <LoginButton onClick={this.handleLoggedInclick} />
-    }
-    else
-    {
-      button = <LogoutButton onClick={this.handleLoggedOutclick} />
-    }
-
-    return (
-      <div>
-        <Greeting isLoggedIn={isLoggedIn}/>
-        {button}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Greeting isLogIn={isLogIn}/>
+      {button}
+    </div>
+  );
 }
 
 function Greeting(props) {
   let message = "";
 
-  if(props.isLoggedIn)
+  if(props.isLogIn)
   {
-    message = "Logged Out";
+    message = "Logged In";
   }
   else
   {
-    message = "Logged In";
+    message = "Logged Out";
   }
 
   return (
