@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
+import PanelView from './Penel/Panel'
 
 function LoginButton(props){
   return (
@@ -66,7 +67,11 @@ function Greeting(props) {
 
 function App() {
   return (
-    <LoginControl  />
+    <React.Fragment>
+      <LoginControl />
+      <br /><br />
+      <PanelView />
+    </React.Fragment>
   );
 }
 
